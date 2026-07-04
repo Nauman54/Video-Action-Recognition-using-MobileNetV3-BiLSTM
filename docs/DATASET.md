@@ -1,169 +1,199 @@
-# UCF101 Dataset
+# 📂 Dataset
 
-This project is trained and evaluated using the **UCF101 Human Action Recognition Dataset**, one of the most widely used benchmark datasets for video action recognition.
+This project uses the **UCF101 Action Recognition Dataset** available on Kaggle, a pre-organized version of the original UCF101 dataset designed for deep learning and video classification tasks.
+
+The dataset contains **13,320 labeled video clips** spanning **101 human action classes**, including sports, musical instrument playing, body movements, and human-object interactions. It is widely used as a benchmark dataset for evaluating video action recognition models. :contentReference[oaicite:0]{index=0}
 
 ---
 
-# Dataset Overview
+# 📊 Dataset Overview
 
 | Property | Value |
 |-----------|------:|
-| Dataset | UCF101 |
+| Dataset Name | UCF101 Action Recognition |
+| Source | Kaggle |
 | Total Classes | 101 |
 | Total Videos | 13,320 |
-| Video Type | Real-world Human Actions |
-| Resolution | Variable |
-| Split | Train / Validation / Test |
+| Video Format | AVI |
+| Data Type | RGB Videos |
+| Framework | PyTorch |
+| Task | Human Action Recognition |
 
 ---
 
-# Action Categories
+# 📥 Dataset Download
 
-The dataset contains 101 action classes covering:
+Download the dataset from Kaggle:
 
-- Sports
-- Human-object interaction
-- Playing musical instruments
-- Body motion
-- Daily activities
+**https://www.kaggle.com/datasets/matthewjansen/ucf101-action-recognition** :contentReference[oaicite:1]{index=1}
 
-Examples include:
+You can also download the original dataset from the University of Central Florida:
+
+**https://www.crcv.ucf.edu/research/data-sets/ucf101/** :contentReference[oaicite:2]{index=2}
+
+---
+
+# 📁 Dataset Structure
+
+The Kaggle dataset is already organized into training, validation, and testing directories, making it convenient for deep learning workflows. It also includes CSV annotation files containing video names, paths, and class labels. :contentReference[oaicite:3]{index=3}
+
+```text
+UCF101_Action_Recognition/
+
+│
+├── train/
+│   ├── ApplyEyeMakeup/
+│   ├── Archery/
+│   ├── Basketball/
+│   ├── ...
+│
+├── validation/
+│   ├── ApplyEyeMakeup/
+│   ├── Archery/
+│   ├── Basketball/
+│   ├── ...
+│
+├── test/
+│   ├── ApplyEyeMakeup/
+│   ├── Archery/
+│   ├── Basketball/
+│   ├── ...
+│
+├── train.csv
+├── validation.csv
+└── test.csv
+```
+
+---
+
+# 📈 Dataset Split
+
+The Kaggle version provides a predefined split:
+
+| Split | Percentage |
+|--------|-----------:|
+| Training | 75% |
+| Validation | 12.5% |
+| Testing | 12.5% |
+
+This predefined split helps ensure consistent evaluation across experiments. :contentReference[oaicite:4]{index=4}
+
+---
+
+# 🎯 Action Categories
+
+The dataset contains **101 human action classes** grouped into five major categories:
+
+- 🏀 Sports
+- 🎸 Playing Musical Instruments
+- 🤝 Human-Human Interaction
+- 🏃 Body Motion
+- 🛠 Human-Object Interaction
+
+Example classes include:
 
 - Basketball
 - Basketball Dunk
-- Soccer Juggling
 - Cricket Bowling
-- Tennis Swing
+- Diving
+- Golf Swing
+- Horse Riding
 - Playing Guitar
 - Playing Piano
-- Diving
-- Horse Riding
-- Push Ups
-- Pull Ups
-- Skiing
-- YoYo
+- Playing Violin
+- Soccer Juggling
+- Tennis Swing
+- Volleyball Spiking
 - Walking With Dog
+- YoYo
 
 ---
 
-# Dataset Structure
+# ⚙️ Data Preprocessing
 
-```
-UCF101/
+The preprocessing pipeline used in this project consists of:
 
-├── ApplyEyeMakeup/
-├── ApplyLipstick/
-├── Archery/
-├── BabyCrawling/
-├── BalanceBeam/
-├── ...
-└── YoYo/
-```
-
-Each folder contains videos belonging to one action category.
-
----
-
-# Download
-
-Download the dataset from the official website:
-
-https://www.crcv.ucf.edu/data/UCF101.php
-
----
-
-# Dataset Preparation
-
-After downloading:
-
-1. Extract the dataset.
-2. Place the dataset in your preferred directory.
-3. Update the dataset path inside the notebook.
-
-Example:
-
-```python
-DATASET_PATH = "D:/Datasets/UCF101"
-```
-
----
-
-# Data Processing Pipeline
-
-The preprocessing pipeline includes:
-
-```
-Videos
+```text
+Input Video
       │
       ▼
 Frame Extraction
       │
       ▼
-Resize
+Resize (224 × 224)
       │
       ▼
-Normalization
+Pixel Normalization
       │
       ▼
 Data Augmentation
       │
       ▼
-Frame Sequence Generation
+Fixed-Length Frame Sequence
       │
       ▼
 PyTorch Dataset
 ```
 
----
-
-# Model Input
-
-Each video is converted into:
-
-- Fixed-length frame sequences
-- Resized images
-- Normalized tensors
-
-These tensors are passed to MobileNetV3 for feature extraction.
+The processed frame sequences are then passed to the MobileNetV3 backbone for spatial feature extraction, followed by a Bi-LSTM network for temporal sequence modeling.
 
 ---
 
-# Training Split
+# 🧠 Model Input
 
-The dataset is divided into:
+Each input sample consists of:
 
-- Training Set
-- Validation Set
-- Test Set
-
-for robust model evaluation.
+- RGB video frames
+- Fixed-length frame sequence
+- Image size: **224 × 224**
+- Tensor format compatible with PyTorch
 
 ---
 
-# Evaluation
+# 📊 Model Evaluation
 
-The model is evaluated using:
+The trained model was evaluated using:
 
 - Classification Accuracy
 - Confusion Matrix
 - ROC Curve
 
-Final Test Accuracy
+### Final Performance
 
-```
-81.41%
+| Metric | Value |
+|---------|------:|
+| Test Accuracy | **81.41%** |
+
+---
+
+# 📚 Why UCF101?
+
+UCF101 is one of the most widely adopted benchmark datasets for video action recognition because it:
+
+- Contains diverse real-world videos collected from YouTube.
+- Covers 101 challenging action categories.
+- Includes significant variations in camera motion, viewpoint, illumination, background clutter, and object appearance.
+- Provides a standardized benchmark for comparing action recognition models. :contentReference[oaicite:5]{index=5}
+
+---
+
+# 📖 Citation
+
+If you use the UCF101 dataset in your research, please cite:
+
+```bibtex
+@article{soomro2012ucf101,
+  title={UCF101: A Dataset of 101 Human Actions Classes From Videos in The Wild},
+  author={Soomro, Khurram and Zamir, Amir Roshan and Shah, Mubarak},
+  journal={CRCV-TR-12-01},
+  year={2012}
+}
 ```
 
 ---
 
-# Citation
+# 🔗 References
 
-If you use the UCF101 dataset in your research, please cite:
-
-```
-Soomro, K., Zamir, A. R., & Shah, M. (2012).
-
-UCF101: A Dataset of 101 Human Actions Classes From Videos in the Wild.
-
-CRCV-TR-12-01.
-```
+- **Kaggle Dataset:** https://www.kaggle.com/datasets/matthewjansen/ucf101-action-recognition :contentReference[oaicite:6]{index=6}
+- **Original UCF101 Dataset:** https://www.crcv.ucf.edu/research/data-sets/ucf101/ :contentReference[oaicite:7]{index=7}
+- **Original Research Paper:** https://arxiv.org/abs/1212.0402 :contentReference[oaicite:8]{index=8}
