@@ -1,34 +1,34 @@
 # 🎥 Video Action Recognition using MobileNetV3 + Bi-LSTM
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)]()
-[![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red.svg)]()
-[![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)]()
+<p align="center">
 
-A deep learning framework for **human action recognition in videos** using **MobileNetV3** for spatial feature extraction and **Bi-LSTM** for temporal sequence modeling. The model is trained and evaluated on the **UCF101** dataset using PyTorch, with support for mixed precision training, automated evaluation, and video inference.
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red.svg)
+![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-green.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
+</p>
+
+A deep learning framework for **human action recognition in videos** using **MobileNetV3** for spatial feature extraction and **Bi-LSTM** for temporal sequence modeling. The model is trained on the **UCF101** benchmark dataset and achieved an overall **81.41% classification accuracy**. This repository includes data preprocessing, model training, evaluation, and inference implemented with PyTorch.
 
 ---
 
-# 📌 Features
+# ✨ Features
 
 - Human Action Recognition from videos
-- MobileNetV3 feature extraction
-- Bi-LSTM temporal sequence modeling
+- MobileNetV3 feature extractor
+- Bi-LSTM temporal modeling
 - Mixed Precision Training (AMP)
-- Automatic dataset preprocessing
-- Training & Validation pipeline
-- Model checkpoint saving
-- Confusion Matrix generation
-- ROC Curve visualization
-- Classification Report
-- Video inference on custom videos
+- Automatic frame preprocessing
+- End-to-end PyTorch implementation
 - GPU acceleration using CUDA
+- Confusion Matrix evaluation
+- ROC Curve visualization
+- Custom video inference
 
 ---
 
 # 🧠 Model Architecture
-
-The proposed framework consists of the following stages:
 
 ```
 Input Video
@@ -40,21 +40,21 @@ Frame Extraction
 Frame Preprocessing
       │
       ▼
-MobileNetV3 Backbone
-(Spatial Features)
+MobileNetV3
+(Spatial Feature Extraction)
       │
       ▼
 Feature Sequence
       │
       ▼
 Bi-LSTM
-(Temporal Learning)
+(Temporal Modeling)
       │
       ▼
 Fully Connected Layer
       │
       ▼
-Softmax Classifier
+Softmax
       │
       ▼
 Predicted Action
@@ -81,9 +81,6 @@ Video-Action-Recognition-MobileNetV3-BiLSTM/
 │   ├── pipeline.png
 │   ├── confusion_matrix.png
 │   ├── roc_curve.png
-│   ├── training_loss.png
-│   ├── validation_accuracy.png
-│   ├── sample_prediction.png
 │
 ├── docs/
 │   ├── DATASET.md
@@ -94,15 +91,11 @@ Video-Action-Recognition-MobileNetV3-BiLSTM/
 │
 ├── outputs/
 │   ├── best_model.pth
-│   ├── classification_report.txt
 │   ├── confusion_matrix.png
 │   ├── roc_curve.png
-│   ├── training_curves.png
 │
 ├── LICENSE
-│
 ├── README.md
-│
 └── requirements.txt
 ```
 
@@ -110,16 +103,9 @@ Video-Action-Recognition-MobileNetV3-BiLSTM/
 
 # 📊 Dataset
 
-The project uses the **UCF101 Human Action Recognition Dataset**.
+The project uses the **UCF101 Human Action Recognition Dataset**, a benchmark dataset containing **13,320 videos** across **101 action categories**. It covers a diverse range of sports, daily activities, and human interactions, making it one of the most widely used datasets for action recognition research.
 
-### Dataset Statistics
-
-- 101 Action Classes
-- 13,320 Videos
-- Real-world Human Activities
-- Sports, Daily Activities, Musical Instruments
-
-For dataset preparation, refer to:
+For dataset preparation and preprocessing instructions, refer to:
 
 📄 **docs/DATASET.md**
 
@@ -141,115 +127,71 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
-For detailed installation instructions, see
+Detailed setup instructions are available in:
 
 📄 **docs/INSTALLATION.md**
 
 ---
 
-# 🚀 Training
+# 🚀 Running the Project
 
-Run the notebook
+Open the notebook
 
 ```
 notebooks/Video_Action_Recognition.ipynb
 ```
 
-The notebook performs:
+The notebook includes:
 
-- Dataset Loading
-- Frame Extraction
-- Data Augmentation
-- Model Training
-- Validation
+- Dataset preprocessing
+- Frame extraction
+- Data loading
+- Model construction
+- Training
 - Evaluation
-- Saving Best Model
+- Prediction
+- Model saving
 
 ---
 
-# 🎯 Inference
+# 📈 Model Performance
 
-Load the trained model and provide any input video.
+The proposed MobileNetV3 + Bi-LSTM architecture was evaluated on the **UCF101** benchmark dataset.
 
-Output:
-
-```
-Input Video
-
-↓
-
-Predicted Class
-
-↓
-
-Confidence Score
-```
-
-Example
-
-```
-Video
-
-↓
-
-Basketball Dunk
-
-↓
-
-Confidence: 98.4%
-```
+| Metric | Value |
+|---------|------:|
+| Dataset | UCF101 |
+| Backbone | MobileNetV3 |
+| Sequence Model | Bi-LSTM |
+| Framework | PyTorch |
+| Test Accuracy | **81.41%** |
+| Evaluation | Confusion Matrix, ROC Curve |
 
 ---
 
-# 📈 Results
-
-The repository includes:
-
-- Training Loss
-- Validation Accuracy
-- Confusion Matrix
-- ROC Curve
-- Classification Report
-
-Example outputs are available inside the **outputs/** directory.
-
----
-
-# 📷 Sample Results
-
-## Model Architecture
-
-<p align="center">
-<img src="assets/architecture.png" width="850">
-</p>
-
----
+# 📊 Evaluation Results
 
 ## Confusion Matrix
 
 <p align="center">
-<img src="assets/confusion_matrix.png" width="650">
+<img src="assets/confusion_matrix.png" width="750">
 </p>
+
+The confusion matrix provides a detailed visualization of the model's classification performance across all action classes, highlighting correctly classified samples and common misclassifications.
 
 ---
 
 ## ROC Curve
 
 <p align="center">
-<img src="assets/roc_curve.png" width="650">
+<img src="assets/roc_curve.png" width="750">
 </p>
+
+The Receiver Operating Characteristic (ROC) Curve illustrates the classifier's ability to distinguish between action classes across different decision thresholds.
 
 ---
 
-## Sample Prediction
-
-<p align="center">
-<img src="assets/sample_prediction.png" width="700">
-</p>
-
----
-
-# 🛠️ Technologies Used
+# 💻 Technologies Used
 
 - Python
 - PyTorch
@@ -263,16 +205,15 @@ Example outputs are available inside the **outputs/** directory.
 
 ---
 
-# 🔮 Future Improvements
+# 🚀 Future Improvements
 
 - Vision Transformer (ViT)
 - TimeSFormer
 - SlowFast Networks
-- 3D CNNs
-- EfficientNet Backbone
-- Real-time Webcam Inference
-- Streamlit/Web Application
-- ONNX/TensorRT Deployment
+- EfficientNet backbone
+- Real-time webcam inference
+- ONNX/TensorRT deployment
+- Streamlit web application
 
 ---
 
@@ -288,4 +229,4 @@ This project is licensed under the MIT License.
 
 AI Engineer | Computer Vision | Deep Learning | Generative AI
 
-If you find this project useful, consider giving it a ⭐ on GitHub.
+If you found this repository helpful, consider giving it a ⭐ to support the project.
