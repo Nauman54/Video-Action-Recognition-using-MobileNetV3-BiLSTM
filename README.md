@@ -128,7 +128,7 @@ pip install -r requirements.txt
 
 Detailed setup instructions are available in:
 
-📄 **docs/INSTALLATION.md**
+📄 **docs/INSTALLATION.md** 
 
 ---
 
