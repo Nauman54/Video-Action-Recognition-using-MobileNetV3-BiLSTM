@@ -20,9 +20,9 @@ Before installing the project, ensure the following software is installed:
 # Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/Video-Action-Recognition-MobileNetV3-BiLSTM.git
+git clone https://github.com/Nauman54/Video-Action-Recognition-using-MobileNetV3-BiLSTM.git
 
-cd Video-Action-Recognition-MobileNetV3-BiLSTM
+cd Video-Action-Recognition-using-MobileNetV3-BiLSTM
 ```
 
 ---
