@@ -11,6 +11,8 @@
 
 A deep learning framework for **human action recognition in videos** using **MobileNetV3** for spatial feature extraction and **Bi-LSTM** for temporal sequence modeling. The model is trained on the **UCF101** benchmark dataset and achieved an overall **81.41% classification accuracy**. This repository includes data preprocessing, model training, evaluation, and inference implemented with PyTorch.
 
+![Architecture](assets/Architecture.png)
+
 ---
 
 # ✨ Features
@@ -65,7 +67,7 @@ Predicted Action
 # 🏗️ Project Pipeline
 
 <p align="center">
-<img src="assets/pipeline.png" width="900">
+<img src="assets/Pipeline.png" width="900">
 </p>
 
 ---
