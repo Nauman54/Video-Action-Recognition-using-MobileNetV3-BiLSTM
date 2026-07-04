@@ -120,7 +120,6 @@ After training, the following files are generated:
 ```
 outputs/
 │
-├── best_model.pth
 ├── confusion_matrix.png
 └── roc_curve.png
 ```
