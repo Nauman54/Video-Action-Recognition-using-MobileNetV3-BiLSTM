@@ -79,10 +79,8 @@ Video-Action-Recognition-MobileNetV3-BiLSTM/
 
 │
 ├── assets/
-│   ├── architecture.png
-│   ├── pipeline.png
-│   ├── confusion_matrix.png
-│   ├── roc_curve.png
+│   ├── Architecture.png
+│   ├── Pipeline.png
 │
 ├── docs/
 │   ├── DATASET.md
@@ -92,9 +90,8 @@ Video-Action-Recognition-MobileNetV3-BiLSTM/
 │   ├── Video_Action_Recognition.ipynb
 │
 ├── outputs/
-│   ├── best_model.pth
-│   ├── confusion_matrix.png
-│   ├── roc_curve.png
+│   ├── Confusion-Matrix.jpeg
+│   ├── ROC-Curve.jpeg
 │
 ├── LICENSE
 ├── README.md
