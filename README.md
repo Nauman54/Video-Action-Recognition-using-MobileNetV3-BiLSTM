@@ -115,9 +115,9 @@ For dataset preparation and preprocessing instructions, refer to:
 Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/Video-Action-Recognition-MobileNetV3-BiLSTM.git
+git clone https://github.com/Nauman54/Video-Action-Recognition-using-MobileNetV3-BiLSTM.git
 
-cd Video-Action-Recognition-MobileNetV3-BiLSTM
+cd Video-Action-Recognition-using-MobileNetV3-BiLSTM
 ```
 
 Install dependencies
