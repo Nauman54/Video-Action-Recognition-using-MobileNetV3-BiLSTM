@@ -1,94 +1,101 @@
 # 📂 Dataset
 
-This project uses the **UCF101 Action Recognition Dataset** available on Kaggle, a pre-organized version of the original UCF101 dataset designed for deep learning and video classification tasks.
-
-The dataset contains **13,320 labeled video clips** spanning **101 human action classes**, including sports, musical instrument playing, body movements, and human-object interactions. It is widely used as a benchmark dataset for evaluating video action recognition models. :contentReference[oaicite:0]{index=0}
+This project uses the **UCF101 - Action Recognition** dataset provided on Kaggle by **Matthew Jansen**. The dataset is a preprocessed version of the original UCF101 benchmark and is already organized into **training**, **validation**, and **testing** subsets, making it ready for deep learning workflows.
 
 ---
 
-# 📊 Dataset Overview
+# 📌 Dataset Overview
 
 | Property | Value |
-|-----------|------:|
-| Dataset Name | UCF101 Action Recognition |
+|----------|-------|
+| Dataset | UCF101 - Action Recognition |
 | Source | Kaggle |
+| Original Dataset | UCF101 (CRCV, University of Central Florida) |
 | Total Classes | 101 |
 | Total Videos | 13,320 |
-| Video Format | AVI |
-| Data Type | RGB Videos |
+| Dataset Type | Video Classification |
 | Framework | PyTorch |
-| Task | Human Action Recognition |
+| Evaluation | Classification Accuracy, Confusion Matrix, ROC Curve |
 
 ---
 
-# 📥 Dataset Download
+# 📥 Download
 
 Download the dataset from Kaggle:
 
-**https://www.kaggle.com/datasets/matthewjansen/ucf101-action-recognition** :contentReference[oaicite:1]{index=1}
+https://www.kaggle.com/datasets/matthewjansen/ucf101-action-recognition
 
-You can also download the original dataset from the University of Central Florida:
-
-**https://www.crcv.ucf.edu/research/data-sets/ucf101/** :contentReference[oaicite:2]{index=2}
+The dataset is approximately **6–7 GB** after extraction.
 
 ---
 
 # 📁 Dataset Structure
 
-The Kaggle dataset is already organized into training, validation, and testing directories, making it convenient for deep learning workflows. It also includes CSV annotation files containing video names, paths, and class labels. :contentReference[oaicite:3]{index=3}
+After downloading and extracting, the dataset should have the following structure:
 
 ```text
-UCF101_Action_Recognition/
+ucf101-action-recognition/
 
 │
 ├── train/
 │   ├── ApplyEyeMakeup/
+│   ├── ApplyLipstick/
 │   ├── Archery/
-│   ├── Basketball/
 │   ├── ...
+│   └── YoYo/
 │
-├── validation/
+├── val/
 │   ├── ApplyEyeMakeup/
-│   ├── Archery/
-│   ├── Basketball/
+│   ├── ApplyLipstick/
 │   ├── ...
+│   └── YoYo/
 │
 ├── test/
 │   ├── ApplyEyeMakeup/
-│   ├── Archery/
-│   ├── Basketball/
+│   ├── ApplyLipstick/
 │   ├── ...
+│   └── YoYo/
 │
 ├── train.csv
-├── validation.csv
+├── val.csv
 └── test.csv
 ```
 
----
+Each action class contains multiple video clips stored in AVI format.
 
-# 📈 Dataset Split
+The accompanying CSV files provide:
 
-The Kaggle version provides a predefined split:
-
-| Split | Percentage |
-|--------|-----------:|
-| Training | 75% |
-| Validation | 12.5% |
-| Testing | 12.5% |
-
-This predefined split helps ensure consistent evaluation across experiments. :contentReference[oaicite:4]{index=4}
+- Video filename
+- Relative path
+- Action label
 
 ---
 
-# 🎯 Action Categories
+# 📊 Dataset Statistics
 
-The dataset contains **101 human action classes** grouped into five major categories:
+| Attribute | Value |
+|-----------|-------|
+| Action Classes | 101 |
+| Total Videos | 13,320 |
+| Training Set | 75% |
+| Validation Set | 12.5% |
+| Testing Set | 12.5% |
+| Video Source | YouTube |
+| Video Format | AVI |
 
-- 🏀 Sports
-- 🎸 Playing Musical Instruments
-- 🤝 Human-Human Interaction
-- 🏃 Body Motion
-- 🛠 Human-Object Interaction
+The Kaggle version follows a **75% / 12.5% / 12.5%** train/validation/test split, allowing models to be trained and evaluated without creating custom splits.
+
+---
+
+# 🏷️ Action Categories
+
+The dataset contains a diverse range of human activities, including:
+
+- Sports
+- Human–Object Interaction
+- Human–Human Interaction
+- Body Motion
+- Musical Instrument Performance
 
 Example classes include:
 
@@ -100,80 +107,78 @@ Example classes include:
 - Horse Riding
 - Playing Guitar
 - Playing Piano
-- Playing Violin
 - Soccer Juggling
 - Tennis Swing
 - Volleyball Spiking
-- Walking With Dog
 - YoYo
 
 ---
 
-# ⚙️ Data Preprocessing
+# 🔄 Data Processing Pipeline
 
-The preprocessing pipeline used in this project consists of:
+The project processes every video through the following pipeline:
 
 ```text
-Input Video
-      │
-      ▼
+Video
+   │
+   ▼
 Frame Extraction
-      │
-      ▼
-Resize (224 × 224)
-      │
-      ▼
-Pixel Normalization
-      │
-      ▼
-Data Augmentation
-      │
-      ▼
-Fixed-Length Frame Sequence
-      │
-      ▼
+   │
+   ▼
+Resize Frames
+(224 × 224)
+   │
+   ▼
+Normalization
+   │
+   ▼
+Sequence Generation
+(Fixed Number of Frames)
+   │
+   ▼
 PyTorch Dataset
+   │
+   ▼
+Model Training
 ```
-
-The processed frame sequences are then passed to the MobileNetV3 backbone for spatial feature extraction, followed by a Bi-LSTM network for temporal sequence modeling.
 
 ---
 
 # 🧠 Model Input
 
-Each input sample consists of:
+Each input video is transformed into a sequence of frames before being passed to the network.
 
-- RGB video frames
-- Fixed-length frame sequence
-- Image size: **224 × 224**
-- Tensor format compatible with PyTorch
+Processing steps include:
+
+- Read video using OpenCV
+- Extract frames
+- Resize frames to **224 × 224**
+- Normalize pixel values
+- Convert frames to tensors
+- Create a fixed-length sequence
+- Feed the sequence into MobileNetV3
+
+The extracted feature sequence is then processed by the Bi-LSTM network for temporal modeling.
 
 ---
 
-# 📊 Model Evaluation
+# 📈 Model Evaluation
 
-The trained model was evaluated using:
+The trained model is evaluated on the **test split** using:
 
 - Classification Accuracy
 - Confusion Matrix
 - ROC Curve
 
-### Final Performance
+## Final Test Accuracy
 
-| Metric | Value |
-|---------|------:|
-| Test Accuracy | **81.41%** |
+**81.41%**
 
 ---
 
-# 📚 Why UCF101?
+# 📚 Original Dataset
 
-UCF101 is one of the most widely adopted benchmark datasets for video action recognition because it:
-
-- Contains diverse real-world videos collected from YouTube.
-- Covers 101 challenging action categories.
-- Includes significant variations in camera motion, viewpoint, illumination, background clutter, and object appearance.
-- Provides a standardized benchmark for comparing action recognition models. :contentReference[oaicite:5]{index=5}
+The Kaggle dataset is derived from the original **UCF101** benchmark introduced by the Center for Research in Computer Vision (CRCV), University of Central Florida. It contains realistic human action videos collected from YouTube and is one of the most widely used benchmarks for action recognition research. :contentReference[oaicite:2]{index=2}
 
 ---
 
@@ -189,11 +194,3 @@ If you use the UCF101 dataset in your research, please cite:
   year={2012}
 }
 ```
-
----
-
-# 🔗 References
-
-- **Kaggle Dataset:** https://www.kaggle.com/datasets/matthewjansen/ucf101-action-recognition :contentReference[oaicite:6]{index=6}
-- **Original UCF101 Dataset:** https://www.crcv.ucf.edu/research/data-sets/ucf101/ :contentReference[oaicite:7]{index=7}
-- **Original Research Paper:** https://arxiv.org/abs/1212.0402 :contentReference[oaicite:8]{index=8}
