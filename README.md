@@ -173,7 +173,7 @@ The proposed MobileNetV3 + Bi-LSTM architecture was evaluated on the **UCF101** 
 ## Confusion Matrix
 
 <p align="center">
-<img src="outputs/Confusion-Matrix.jpeg" width="750">
+<img src="outputs/Confusion-Matrix.jpeg" width="500">
 </p>
 
 The confusion matrix provides a detailed visualization of the model's classification performance across all action classes, highlighting correctly classified samples and common misclassifications.
@@ -183,7 +183,7 @@ The confusion matrix provides a detailed visualization of the model's classifica
 ## ROC Curve
 
 <p align="center">
-<img src="outputs/ROC-Curve.jpeg" width="750">
+<img src="outputs/ROC-Curve.jpeg" width="500">
 </p>
 
 The Receiver Operating Characteristic (ROC) Curve illustrates the classifier's ability to distinguish between action classes across different decision thresholds.
